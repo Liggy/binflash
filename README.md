@@ -1,17 +1,20 @@
 # Binflash
 
-* [About Binflash](#About)
+* [About Binflash](#About-Binflash)
 * [Documentation](#Documentation)
-* [Download](releases)
+* [Download](/liggy/Binflash/releases)
 * [Supported Drives](#Drivelist)
-* [Version history](#History)
+* [Build](#Build)
+* [Version History](#Version-History)
 
-# About
-Binflash is a collection of tools you may use in order to flash your DVD burner with a binary firmware file (most executable flashers are also supported) or to dump the Flash ROM of your burner back to disc. You should be able to work with all devices that are currently accessible in your operating system, even if the drives are attached via Firewire or USB. There have been reports about some external enclosures that do not support sending all commands needed for a successful flash to the drive. Using the flaher in this case can lead to unpredictable results. Furthermore some Windows IDE drivers and some Linux kernel versions are known to cause trouble. So please use the original Microsoft IDE drivers or start the flasher with root user when running from Linux<br />
+# About Binflash
+Binflash is a collection of tools you may use in order to flash your DVD burner with a binary firmware file (most executable flashers are also supported) or to dump the Flash ROM of your burner back to disc. You should be able to work with all devices that are currently accessible in your operating system, even if the drives are attached via Firewire or USB. There have been reports about some external enclosures that do not support sending all commands needed for a successful flash to the drive. Using the flaher in this case can lead to unpredictable results. Furthermore some Windows IDE drivers and some Linux kernel versions are known to cause trouble. So please use the original Microsoft IDE drivers or start the flasher with root user when running from Linux
+
 This flasher is in no way supported by the manufacturers and we cannot guarantee that this program works as expected.
 
 # Documentation
 Depending on the manufacturer dependant version of Binflash, not all options may be available for you.
+
 | Option | Function |
 | - | - |
 | -scan |Scan your IDE-/SCSI/Firewire/USB-adapters for supported devices. Depending on the manufacturer your version of Binflash was written for, some drives may be listed which are not supported. |
@@ -29,7 +32,9 @@ Depending on the manufacturer dependant version of Binflash, not all options may
 ## Example on using Binflash
 
 First of all scan your adapters for valid devices:
+
 _C:\>**necflash -scan**_
+
 This may lead to an output similar to:
 
     Binflash - NEC version - (C) by Liggy and Herrie
@@ -42,19 +47,28 @@ This may lead to an output similar to:
     Firmware : 1.07
 
 Now you should backup your current firmware by issueing the following command, using the device that you got during the device scan:
+
 _C:\>**necflash -dump C:\OldFirmware.bin 1.0.0**_
+
 After accepting the disclaimer and waiting for a few seconds you will get the file C:\OldFirmware.bin which contains your current firmware.
 
+
 Now you probably want to update your drive with a new firmware. You can do so simply by calling the following command:
+
 _C:\>**necflash -flash C:\NewFirmware.bin 1.0.0**_
+
 If you accept the disclaimer and wait for a few seconds again, the burner is updated with the firmware from C:\NewFirmware.bin
 
+
 The following command is used to set the default booktype for DVD+R to DVD-ROM:
+
 _C:\>**necflash -setbt DVD+R DVD-ROM perm 1.0.0**_
+
 For **DVD+R**, **DVD+RW** and **DVD+R-DL** you can set the booktype to **DVD-ROM**, **DVD-R**, **DVD-RW**, **DVD+R**, **DVD+RW** and **DVD+R-DL**. Instead of using **perm** you may also use **temp** if you just want to use the temporary settings that only last until the next drive reset. (This feature is not supported by every firmware)
 
 # Drivelist
 Drives that are supposed to work
+
 | NEC | Optiarc | Others |
 | - | - | - |
 | ND-1100A | AD-5170A | Sony DW-D150A |
@@ -115,6 +129,21 @@ Drives that are supposed to work
 | | AD-7913A | |
 | | AD-7913S | |
 | | AD-7960S | |
+
+# Build
+## Prerequisites
+Last successful Windows build was done using Visual Studio 2010. More recent versions may require changes to the code or the project files.
+
+Despite throwing some warning, Binflash on Linux still seems to compile with GCC version 8.3 successfully.
+
+The DOS version requires [DJGPP](http://www.delorie.com/djgpp/) setup on your machine
+
+The Mac version was built with XCode 3.2.4 on MacOS 10.6.8 (Snow Leopard). Using recent versions will probably require some work.
+
+## Instructions
+On Windows you just open the solution file (binflash.sln) with Visual Studio and build the release you like to have. Choosing target "Oldrelease" should build a version that is compatible with Windows 2000.
+
+The Linux, DOS and Mac versions are generated with "make linux", "make dos" or "make mac" and generate a necflash(.exe) file
 
 # Version history
 | version | Change |

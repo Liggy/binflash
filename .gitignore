@@ -1,0 +1,10 @@
+*.o
+.vs
+*.vcxproj.user
+*.suo
+*.sdf
+Debug
+Oldrelease
+Release
+necflash
+necflash.exe

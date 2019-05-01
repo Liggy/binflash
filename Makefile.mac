@@ -1,0 +1,36 @@
+COMMON_CFLAGS=-Wall
+#DBGFLAGS=-D_DEBUG -Os
+DBGFLAGS=-Os
+PLSCSIMAKEFILE=Makefile.mac
+
+OBJS_i386=binflash.i386.o drive.i386.o necinterface.i386.o necinternal.i386.o plscsi.i386.o
+OBJS_ppc=binflash.ppc.o drive.ppc.o necinterface.ppc.o necinternal.ppc.o plscsi.ppc.o
+
+SDK=-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4
+
+CFLAGS=-framework IOKit -framework CoreFoundation -framework CoreServices
+
+OUTPUT=necflash
+OUTPUT_i386=necflash.i386
+OUTPUT_ppc=necflash.ppc
+
+mac: $(OUTPUT)
+
+$(OUTPUT): $(OUTPUT_i386) $(OUTPUT_ppc)
+	lipo -create -output $(OUTPUT) $(OUTPUT_i386) $(OUTPUT_ppc)
+ 
+$(OUTPUT_i386): $(OBJS_i386)
+	$(CXX) -arch i386 $(SDK) $(COMMON_CFLAGS) $(CFLAGS) -o $(OUTPUT_i386) $(OBJS_i386)
+
+$(OUTPUT_ppc): $(OBJS_ppc)
+	$(CXX) -arch ppc $(SDK) $(COMMON_CFLAGS) $(CFLAGS) -o $(OUTPUT_ppc) $(OBJS_ppc)
+
+plscsi.i386.o:
+	cd plscsi;make -f $(PLSCSIMAKEFILE) i386;cd ..
+plscsi.ppc.o:
+	cd plscsi;make -f $(PLSCSIMAKEFILE) ppc;cd ..
+%.i386.o: %.cpp
+	$(CXX) -arch i386 $(SDK) $(COMMON_CFLAGS) $(DBGFLAGS) -c -o $@ -Os -Wall $<
+
+%.ppc.o: %.cpp
+	$(CXX) -arch ppc $(SDK) $(COMMON_CFLAGS) $(DBGFLAGS) -c -o $@ -Os -Wall $<

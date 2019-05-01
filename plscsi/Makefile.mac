@@ -1,0 +1,27 @@
+OBJS_i386=cl.i386.o dos32aspi.i386.o dosaspi.i386.o scl.i386.o scsi.i386.o scsistub.i386.o sgio.i386.o sptx.i386.o stuc.i386.o wideint.i386.o winaspi.i386.o
+OBJS_ppc=cl.ppc.o dos32aspi.ppc.o dosaspi.ppc.o scl.ppc.o scsi.ppc.o scsistub.ppc.o sgio.ppc.o sptx.ppc.o stuc.ppc.o wideint.ppc.o winaspi.ppc.o
+
+OUTPUT=../plscsi.o
+OUTPUT_i386=../plscsi.i386.o
+OUTPUT_ppc=../plscsi.ppc.o
+SDK=-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4
+
+plscsi: $(OUTPUT)
+
+i386: $(OUTPUT_i386)
+ppc: $(OUTPUT_ppc)
+
+$(OUTPUT): $(OUTPUT_i386) $(OUTPUT_ppc)
+	lipo -create -output $(OUTPUT) $(OUTPUT_i386) $(OUTPUT_ppc)
+ 
+$(OUTPUT_i386): $(OBJS_i386)
+	$(LD) -r -arch i386 -o $(OUTPUT_i386) $(OBJS_i386)
+
+$(OUTPUT_ppc): $(OBJS_ppc)
+	$(LD) -r -arch ppc -o $(OUTPUT_ppc) $(OBJS_ppc)
+
+%.i386.o: %.cpp
+	$(CXX) -arch i386 $(SDK) -c -o $@ -Os -Wall $<
+
+%.ppc.o: %.cpp
+	$(CXX) -arch ppc $(SDK) -c -o $@ -Os -Wall $<

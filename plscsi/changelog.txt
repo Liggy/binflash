@@ -1,0 +1,8 @@
+v 1.1 - o Improved Linux support:
+	  Recent versions of the Linux kernel do sgio passthru natively, and cancel the
+	  need for the SCSI generic module and /dev/sg#
+	  For instance, you can now access a /dev/hdc DVD-ROM directly
+	  sgioReadName() was modified accordingly for proper scanning of these devices.
+	o DOS/DPMI support files now included (for DJGPP users)
+
+v 1.0 - first release
