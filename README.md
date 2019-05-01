@@ -2,7 +2,7 @@
 
 * [About Binflash](#About-Binflash)
 * [Documentation](#Documentation)
-* [Download](/liggy/Binflash/releases)
+* [Download](https://github.com/Liggy/binflash/releases)
 * [Supported Drives](#Drivelist)
 * [Build](#Build)
 * [Version History](#Version-History)
