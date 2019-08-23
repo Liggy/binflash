@@ -3,6 +3,7 @@
 * [About Binflash](#About-Binflash)
 * [Documentation](#Documentation)
 * [Download](https://github.com/Liggy/binflash/releases)
+* [Firmwares and Tools](#Firmwares-and-Tools)
 * [Supported Drives](#Drivelist)
 * [Build](#Build)
 * [Version History](#Version-History)
@@ -65,6 +66,9 @@ The following command is used to set the default booktype for DVD+R to DVD-ROM:
 _C:\>**necflash -setbt DVD+R DVD-ROM perm 1.0.0**_
 
 For **DVD+R**, **DVD+RW** and **DVD+R-DL** you can set the booktype to **DVD-ROM**, **DVD-R**, **DVD-RW**, **DVD+R**, **DVD+RW** and **DVD+R-DL**. Instead of using **perm** you may also use **temp** if you just want to use the temporary settings that only last until the next drive reset. (This feature is not supported by every firmware)
+
+# Firmwares and Tools
+The archive of firmwares and tools that used to be available on http<span>://</span>liggydee.cdfreaks.com can now be downloaded from [Share Online](http://www.share-online.biz/dl/5Y8FEPWPLBH)
 
 # Drivelist
 Drives that are supposed to work
