@@ -375,11 +375,7 @@ struct XFlashCalib
 
 struct BootflashAppend
 {
-   unsigned int seed;
-   u32 check;
    u8 Firmware[32768];
-   u32 httpauthcheck;
    XFlashCalib CalibData;
-   u8 userinfo[256];
    u32 checksum;
 };
