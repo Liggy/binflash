@@ -19,7 +19,7 @@ $(OUTPUT): $(OBJS)
 	$(CXX) $(ARCHFLAGS) $(COMMON_CFLAGS) $(CFLAGS_OS) -o $(OUTPUT) $(OBJS)
 
 plscsi.o:
-	cd plscsi;make $(PLSCSIMAKEFILE);cd ..
+	$(MAKE) -C plscsi $(PLSCSIMAKEFILE)
 
 %.o: %.cpp
 	$(CXX) $(COMMON_CFLAGS) $(ARCHFLAGS) $(DBGFLAGS) -c $<
